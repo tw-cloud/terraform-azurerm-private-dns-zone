@@ -8,21 +8,20 @@ variable "name" {
   type        = string
 }
 
-variable "a_records" {
-  type = map(object({
-    ttl     = optional(number, 3600)
-    records = list(string)
-    tags    = optional(map(string), {})
-  }))
-  default = {}
+variable "zone_name" {
+  description = "The name of the private DNS zone to associate the record with."
+  type        = string
 }
 
-variable "vnet_links" {
-  type = map(object({
-    vnet_id              = string
-    registration_enabled = optional(bool, false)
-  }))
-  default = {}
+variable "ttl" {
+  description = "The Time To Live (TTL) of the record."
+  type        = number
+  default     = 3600
+}
+
+variable "records" {
+  description = "A list of records to associate with the private DNS zone."
+  type        = list(string)
 }
 
 variable "tags" {
